@@ -5,11 +5,8 @@ $pass = "";
 $db = "orkut";
 
 try {
-    $conn = new PDO("mysql:host=$host;dbname=$db", $user, $pass);
-    // define o modo de erro do PDO como exceção
+    $conn = new PDO("mysql:host=$host;dbname=$db;charset=utf8", $user, $pass);
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    echo "Conectado com sucesso";
 } catch (PDOException $e) {
-    echo "Falha na conexão: " . $e->getMessage();
+    die("Erro de conexão com o banco de dados: " . $e->getMessage());
 }
-?>
