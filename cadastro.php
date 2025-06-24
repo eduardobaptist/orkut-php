@@ -55,7 +55,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     $file_name = uniqid() . '.' . $file_ext;
                     $target_path = $upload_dir . $file_name;
 
-                    // Validate image
                     $allowedTypes = ['jpg', 'jpeg', 'png', 'gif'];
                     if (in_array(strtolower($file_ext), $allowedTypes)) {
                         if (move_uploaded_file($_FILES['profile_picture']['tmp_name'], $target_path)) {

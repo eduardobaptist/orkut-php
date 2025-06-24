@@ -1,0 +1,57 @@
+body {
+  background-color: #d9e6f7;
+  font-family: Arial, sans-serif;
+}
+
+.profile-img {
+  width: 200px;
+  height: 200px;
+  border-radius: 8px;
+  object-fit: cover;
+  border: 1px solid rgb(184, 184, 184);
+}
+
+.user-name {
+  font-weight: bold;
+  color: #4b6c9d;
+  font-size: 1.2rem;
+  margin-bottom: 2px;
+}
+
+.message-card {
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+.friend-card {
+  border: none;
+  border-radius: 10px;
+  background-color: white;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+.friend-img {
+  width: 60px;
+  height: 60px;
+  border-radius: 8px;
+  object-fit: cover;
+  border: 1px solid rgb(184, 184, 184);
+}
+
+.friend-name {
+  font-weight: bold;
+  font-size: 1rem;
+}
+
+.friend-count {
+  font-size: 0.8rem;
+  color: #e94100;
+}
+
+.sidebar-btn {
+  width: 100%;
+  margin-bottom: 10px;
+  text-align: left;
+  padding: 10px 15px;
+}
