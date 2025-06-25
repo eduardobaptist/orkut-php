@@ -40,11 +40,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 
 if (empty($users)) {
-    $errors[] = "Nenhum usuário disponível para solicitar amizade";
+    $errors[] = "Nenhum usuário encontrado.";
 }
 
 function fetch_users($conn, $user_id)
 {
+    $search = htmlspecialchars(isset($_GET['search']) ? "%{$_GET['search']}%" : "%%");
+
     $stmt = $conn->prepare(
         "WITH cte_user_friends AS (
                 SELECT friend_id AS user_id FROM friends WHERE user_id = ? AND status IN ('pending', 'accepted')
@@ -65,10 +67,11 @@ function fetch_users($conn, $user_id)
             FROM users u
             WHERE u.id != ?
             AND u.id NOT IN (SELECT user_id FROM cte_user_friends)
+            AND u.full_name LIKE ?
             ORDER BY u.full_name;"
     );
 
-    $stmt->execute([$user_id, $user_id, $user_id]);
+    $stmt->execute([$user_id, $user_id, $user_id, $search]);
     $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
     return $users;
 }
@@ -110,16 +113,17 @@ function fetch_users($conn, $user_id)
                     ?>
                 </div>
 
+                <form method="GET" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>"
+                    class="row g-2 d-flex align-items-center">
+                    <div class="col-6">
+                        <input type="text" class="form-control d-flex" placeholder="Buscar usuário..." id="search"
+                            name="search" required>
+                    </div>
+                    <div class="col-1"><button class="btn btn-primary w-75" type="submit">Ok</button></div>
+                </form>
+                <hr>
+
                 <?php if (!empty($users)): ?>
-                    <form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>"
-                        class="row g-2 d-flex align-items-center">
-                        <div class="col-6">
-                            <input class="form-control d-flex" placeholder="Buscar usuário..." id="search" name="search"
-                                required>
-                        </div>
-                        <div class="col-1"><button class="btn btn-primary w-75" type="submit">Ok</button></div>
-                    </form>
-                    <hr>
                     <div class="row row-cols-1 g-3">
 
                         <?php foreach ($users as $user): ?>

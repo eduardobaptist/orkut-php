@@ -30,9 +30,11 @@ echo <<<HTML
                     </button>
                 </a>
 
-                <button class='btn btn-outline-secondary w-100 mb-2 text-start'>
-                    <i class='bi bi-pencil-square me-2'></i> Editar perfil
-                </button>
+                <a href="editprofile.php">
+                    <button class='btn btn-outline-secondary w-100 mb-2 text-start'>
+                        <i class='bi bi-pencil-square me-2'></i> Editar perfil
+                    </button>
+                </a>
                 
                 <a href="addamigo.php">
                     <button class='btn btn-outline-secondary w-100 mb-2 text-start'>
